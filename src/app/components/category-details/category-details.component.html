@@ -1,0 +1,58 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentCategory.id">
+    <h4>Categoria</h4>
+    <div>
+      <label for=""><strong>Titulo:</strong></label> {{currentCategory.name}}
+    </div>
+    <div>
+      <label for=""><strong>Articulos:</strong></label> aqui van a ir los items de las categorias...
+    </div>
+
+    <a
+    class="badge badge-warning"
+    routerLink="/categories/{{currentCategory.id}}">
+      Editar
+    </a>
+  </div>
+
+  <div *ngIf="!currentCategory">
+    <br>
+    <p>Haga click en alguna categoria...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div class="edit-form">
+    <h4>Categoria</h4>
+    <form>
+      <div class="form-group">
+        <label for="name">Titulo</label>
+        <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="currentCategory.name"
+        name="name" >
+      </div>
+    </form>
+
+    <button
+    class="badge badge-danger mr-2"
+    (click)="deleteCategory()">
+      Borrar
+    </button>
+
+    <button
+    type="submit"
+    class="badge bage-success mb-2"
+    (click)="updateCategory()">
+      Actualizar
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentCategory.id">
+    <br>
+    <p>no se puede acceder a la categoria</p>
+  </div>
+</ng-template>
